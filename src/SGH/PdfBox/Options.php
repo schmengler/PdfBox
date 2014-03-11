@@ -2,62 +2,76 @@
 namespace SGH\PdfBox;
 /**
  * Contains options for the Command class
- * 
+ *
  * @author Fabian Schmengler <fschmengler@sgh-it.eu>
  * @copyright SGH informationstechnologie UGmbh 2011-2014
  * @category SGH
  * @package PdfBox
+ * @link http://pdfbox.apache.org/commandline/#extractText
  *
  */
 class Options
 {
-    protected $sort = false;
-    
-    protected $ignoreBeads = false;
-    
-    protected $force = false;
-    
-    protected $startPage = 1;
-    
-    protected $endPage = PHP_INT_MAX;
-    
     /**
-     * @return the $sort
+     * @var bool
+     */
+    protected $sort = false;
+    /**
+     * @var bool
+     */
+    protected $ignoreBeads = false;
+    /**
+     * @var bool
+     */
+    protected $force = false;
+    /**
+     * @var int
+     */
+    protected $startPage = 1;
+    /**
+     * @var int
+     */
+    protected $endPage = PHP_INT_MAX;
+
+    /**
+     * @return bool $sort
      */
     public function getSort() {
         return $this->sort;
     }
 
     /**
-     * @return the $ignoreBeads
+     * @return bool $ignoreBeads
      */
     public function getIgnoreBeads() {
         return $this->ignoreBeads;
     }
 
     /**
-     * @return the $force
+     * @return bool $force
      */
     public function getForce() {
         return $this->force;
     }
 
     /**
-     * @return the $startPage
+     * @return int $startPage
      */
     public function getStartPage() {
         return $this->startPage;
     }
 
     /**
-     * @return the $endPage
+     * @return int $endPage
      */
     public function getEndPage() {
         return $this->endPage;
     }
 
     /**
-     * @param field_type $sort
+     * Sort the text before writing.
+     *
+     * @param bool $sort
      */
     public function setSort($sort) {
         $this->sort = (bool) $sort;
@@ -65,7 +79,9 @@ class Options
     }
 
     /**
-     * @param field_type $ignoreBeads
+     * Disables the separation by beads.
+     *
+     * @param bool $ignoreBeads
      */
     public function setIgnoreBeads($ignoreBeads) {
         $this->ignoreBeads = (bool) $ignoreBeads;
@@ -73,7 +89,9 @@ class Options
     }
 
     /**
-     * @param field_type $force
+     * Enables pdfbox to ignore corrupt objects.
+     *
+     * @param bool $force
      */
     public function setForce($force) {
         $this->force = (bool) $force;
@@ -81,7 +99,9 @@ class Options
     }
 
     /**
-     * @param field_type $startPage
+     * Set the first page to extract, one based.
+     *
+     * @param int $startPage
      */
     public function setStartPage($startPage) {
         $this->startPage = (int) $startPage;
@@ -89,7 +109,9 @@ class Options
     }
 
     /**
-     * @param field_type $endPage
+     * Set the last page to extract, one based.
+     *
+     * @param int $endPage
      */
     public function setEndPage($endPage) {
         $this->endPage = (int) $endPage;

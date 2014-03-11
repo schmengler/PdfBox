@@ -3,7 +3,7 @@ namespace SGH\PdfBox;
 
 /**
  * PDF converter implemention with PdfBox
- * 
+ *
  * @author Fabian Schmengler <fschmengler@sgh-it.eu>
  * @copyright SGH informationstechnologie UGmbh 2011-2014
  * @category SGH
@@ -24,8 +24,8 @@ class PdfBox implements PdfConverter
      * @var string
      */
     protected $_pdfFile;
-    
-    
+
+
     /* (non-PHPdoc)
      * @see SGH\PdfBox.PdfConverter::domFromPdfFile()
      */
@@ -76,7 +76,7 @@ class PdfBox implements PdfConverter
         $command = $this->prepareCommand($filename, $saveToFile);
         return $this->execute($command);
     }
-    
+
     /* (non-PHPdoc)
      * @see SGH\PdfBox.PdfConverter::textFromPdfStream()
      */
@@ -87,17 +87,31 @@ class PdfBox implements PdfConverter
         $command = $this->prepareCommand($temp, $saveToFile, true);
         return $this->execute($command);
     }
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->resetOptions();
     }
-    
+    /**
+     * Reset advanced options to default values
+     *
+     * @return \SGH\PdfBox\PdfBox
+     */
     public function resetOptions()
     {
         $this->_options = new Options();
+        return $this;
     }
-    
+    /**
+     * Factory method for Command object
+     *
+     * @param string $filename   Path to input file
+     * @param string $saveToFile Path to output file or null if file should not be saved
+     * @param bool   $pdfIsTemp  True if given PDF is a temporary file. Default: false
+     * @return \SGH\PdfBox\Command
+     */
     protected function prepareCommand($filename, $saveToFile, $pdfIsTemp = false)
     {
         $resultIsTemp = false;
@@ -111,7 +125,13 @@ class PdfBox implements PdfConverter
         $command->setTextFile($saveToFile, $resultIsTemp);
         return $command;
     }
-
+    /**
+     * Execute given Command object.
+     *
+     * @param Command $command
+     * @throws \RuntimeException If PdfBox returns error exit code
+     * @return string            The converted text or HTML as string
+     */
     protected function execute(Command $command)
     {
         $command->setJar($this->getPathToPdfBox());
@@ -130,12 +150,19 @@ class PdfBox implements PdfConverter
         }
         return $result;
     }
+    /**
+     * Return configuration object
+     *
+     * @return \SGH\PdfBox\Options
+     */
     public function getOptions()
     {
         return $this->_options;
     }
     /**
-     * @return the $_pathToPdfBox
+     * Return full path to PdfBox jar file
+     *
+     * @return string $_pathToPdfBox
      */
     public function getPathToPdfBox()
     {
@@ -143,6 +170,8 @@ class PdfBox implements PdfConverter
     }
 
     /**
+     * Set full path to PdfBox jar file
+     *
      * @param string $_pathToPdfBox
      */
     public function setPathToPdfBox($_pathToPdfBox)
