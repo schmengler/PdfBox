@@ -61,7 +61,7 @@ class PdfBox implements PdfConverter
      */
     public function htmlFromPdfStream($content, $saveToFile = null)
     {
-        $temp = tempnam(__DIR__, 'pdfbox');
+        $temp = tempnam(sys_get_temp_dir(), 'pdfbox');
         file_put_contents($temp, $content);
         $command = $this->prepareCommand($temp, $saveToFile, true);
         $command->setAsHtml(true);
@@ -82,7 +82,7 @@ class PdfBox implements PdfConverter
      */
     public function textFromPdfStream($content, $saveToFile = null)
     {
-        $temp = tempnam(__DIR__, 'pdfbox');
+        $temp = tempnam(sys_get_temp_dir(), 'pdfbox');
         file_put_contents($temp, $content);
         $command = $this->prepareCommand($temp, $saveToFile, true);
         return $this->execute($command);
@@ -118,8 +118,7 @@ class PdfBox implements PdfConverter
         $command = new Command();
         $command->setPdfFile($filename, $pdfIsTemp);
         if ($saveToFile === null) {
-        	//FIXME tmp dir \w space results in java.filenotfound exception
-            $saveToFile = tempnam(__DIR__, 'pdfbox');
+            $saveToFile = tempnam(sys_get_temp_dir(), 'pdfbox');
             $resultIsTemp = true;
         }
         $command->setTextFile($saveToFile, $resultIsTemp);
@@ -137,6 +136,9 @@ class PdfBox implements PdfConverter
         $command->setJar($this->getPathToPdfBox());
         $command->setOptions($this->_options);
         exec((string) $command . ' 2>&1', $stdErr, $exitCode);
+        if ($command->getPdfFileIsTemp()) {
+            unlink($command->getPdfFile());
+        }
         if ($exitCode > 0) {
             throw new \RuntimeException(join("\n", $stdErr), $exitCode);
         }
@@ -144,9 +146,6 @@ class PdfBox implements PdfConverter
         $result = file_get_contents($resultFile);
         if ($command->getTextFileIsTemp()) {
             unlink($resultFile);
-        }
-        if ($command->getPdfFileIsTemp()) {
-            unlink($command->getPdfFile());
         }
         return $result;
     }
