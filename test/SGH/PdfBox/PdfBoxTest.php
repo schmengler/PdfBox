@@ -117,7 +117,6 @@ Polizei Grenadier Alte Hex'
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $html = $this->PdfBox->htmlFromPdfFile(__DIR__ . '/test.pdf');
-        var_dump($html);
         $this->markTestSkipped('not very useful feature atm'); //TODO test as needed
     }
 
@@ -142,7 +141,7 @@ Polizei Grenadier Alte Hex'
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $text = $this->PdfBox->textFromPdfFile(__DIR__ . '/test.pdf');
-        $this->assertEquals(self::$expectedText, $text);
+        $this->assertEqualsIgnoreWhitespace(self::$expectedText, $text);
     }
 
     /**
@@ -155,7 +154,7 @@ Polizei Grenadier Alte Hex'
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $text = $this->PdfBox->textFromPdfStream(file_get_contents(__DIR__ . '/test.pdf'));
-        $this->assertEquals(self::$expectedText, $text);
+        $this->assertEqualsIgnoreWhitespace(self::$expectedText, $text);
     }
 
     /**
@@ -171,5 +170,19 @@ Polizei Grenadier Alte Hex'
         $this->PdfBox->textFromPdfFile(__DIR__ . '/test.pdf');
     }
 
+    /**
+     * Assert two strings are equal, ignoring white space changes.
+     * Any sequence of 1 or more white spaces is treaten equal.
+     *
+     * @param string $expected
+     * @param string $actual
+     * @param string $message
+     */
+    public static function assertEqualsIgnoreWhitespace($expected, $actual, $message = '')
+    {
+        $expected = preg_replace('/\s+/', ' ', $expected);
+        $actual = preg_replace('/\s+/', ' ', $actual);
+        return self::assertEquals($expected, $actual, $message);
+    }
 }
 
