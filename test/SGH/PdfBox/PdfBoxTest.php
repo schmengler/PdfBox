@@ -33,7 +33,8 @@ class PdfBoxTest extends \PHPUnit_Framework_TestCase {
      *
      * @var string
      */
-    private static $expectedText = "Test-Dokument
+    private static $expectedText = <<<TXT
+Test-Dokument
 Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
 won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
 ship. Clamps, burn down the crew.
@@ -45,7 +46,35 @@ Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
 inhibitions?
 Eins Zwei Drei Vier Fünf Sechs
 Polizei Grenadier Alte Hex'
-";
+
+TXT;
+
+    private static $expectedHtml = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Test-Dokument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div style="page-break-before:always; page-break-after:always"><div><p>Test-Dokument
+Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
+ship. Clamps, burn down the crew.
+</p>
+<p>The Cryonic Woman
+So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
+</p>
+<p>&#8226; She also liked to shut up!
+&#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
+inhibitions?
+</p>
+<p>Eins Zwei Drei Vier F&#252;nf Sechs
+Polizei Grenadier Alte Hex'</p>
+
+</div></div>
+</body></html>
+HTML;
 
     /**
      * Prepares the environment before running a test. The pdfbox-jar environemnt variable
@@ -90,7 +119,7 @@ Polizei Grenadier Alte Hex'
         $this->PdfBox->setPathToPdfBox($this->jar);
         $dom = $this->PdfBox->domFromPdfFile(__DIR__ . '/test.pdf');
         $this->assertInstanceOf('\DOMDocument', $dom);
-        //TODO test as needed
+        $this->markTestIncomplete('TODO: Test as needed');
     }
 
     /**
@@ -104,7 +133,7 @@ Polizei Grenadier Alte Hex'
         $this->PdfBox->setPathToPdfBox($this->jar);
         $dom = $this->PdfBox->domFromPdfStream(file_get_contents(__DIR__ . '/test.pdf'));
         $this->assertInstanceOf('\DOMDocument', $dom);
-        //TODO test as needed
+        $this->markTestIncomplete('TODO: Test as needed');
     }
 
     /**
@@ -117,7 +146,7 @@ Polizei Grenadier Alte Hex'
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $html = $this->PdfBox->htmlFromPdfFile(__DIR__ . '/test.pdf');
-        $this->markTestSkipped('not very useful feature atm'); //TODO test as needed
+        $this->assertEqualsIgnoreWhitespace(self::$expectedHtml, $html);
     }
 
     /**
@@ -128,7 +157,9 @@ Polizei Grenadier Alte Hex'
      */
     public function testHtmlFromPdfStream()
     {
-        $this->markTestSkipped('not very useful feature atm'); //TODO test as needed
+        $this->PdfBox->setPathToPdfBox($this->jar);
+        $html = $this->PdfBox->htmlFromPdfStream(file_get_contents(__DIR__ . '/test.pdf'));
+        $this->assertEqualsIgnoreWhitespace(self::$expectedHtml, $html);
     }
 
     /**
