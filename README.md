@@ -20,9 +20,9 @@ $html = $converter->htmlFromPdfStream($pdf);
 $dom  = $converter->domFromPdfStream($pdf);
 ```
 
-If the source PDF is a file, use xxxFromPdfFile() instead xxxFromPdfStream() with the source path as parameter.
+If the source PDF is a file, use `xxxFromPdfFile()` instead `xxxFromPdfStream()` with the source path as parameter.
 
-If you want to save the converted output to a file, specify the destination path as second parameter of the xxxFromPdfxxx() methods.
+If you want to save the converted output to a file, specify the destination path as second parameter of the `xxxFromPdfxxx()` methods.
 
 ## Advanced Usage
 
@@ -46,4 +46,4 @@ $converter->getOptions()
 ```
 
 ## PHPUnit tests
-To run the Unit Tests, change the environment variable pdfbox-jar to the full path of your PdfBox jar file. See *phpunit.xml*
+To run the unit tests, change the environment variable `pdfbox-jar` to the full path of your PdfBox jar file. See *phpunit.xml.dist*
