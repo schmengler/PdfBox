@@ -1,10 +1,6 @@
 <?php
+
 namespace SGH\PdfBox;
-
-require_once 'PHPUnit\Framework\TestCase.php';
-
-require_once __DIR__ . '/../../../src/SGH/PdfBox/Command.php';
-require_once __DIR__ . '/../../../src/SGH/PdfBox/Options.php';
 
 /**
  * Test case for Command class.
@@ -17,8 +13,6 @@ require_once __DIR__ . '/../../../src/SGH/PdfBox/Options.php';
  */
 class CommandTest extends \PHPUnit_Framework_TestCase
 {
-    const __CLASS = __CLASS__;
-
     private $jar = 'pdfbox-app-1.6.0.jar';
 
     /**

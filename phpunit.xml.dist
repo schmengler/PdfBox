@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="test/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="PdfBox Test Suite">
+            <directory>test/SGH/PdfBox</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="pdfbox-jar" value="pdfbox-app-1.8.6.jar" />
+    </php>
+</phpunit>
