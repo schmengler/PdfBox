@@ -1,0 +1,21 @@
+{
+    "name": "sgh/pdfbox",
+    "type": "library",
+    "description": "PHP5 wrapper for the Apache PdfBox ExtractText utility.",
+    "keywords": ["pdf", "pdfbox"],
+    "homepage": "https://github.com/schmengler/PdfBox",
+    "authors": [
+        {
+            "name": "Fabian Schmengler",
+            "email": "fschmengler@sgh-it.eu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "SGH\\PdfBox": "src/"
+        }
+    }
+}

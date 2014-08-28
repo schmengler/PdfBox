@@ -1,13 +1,6 @@
 <?php
+
 namespace SGH\PdfBox;
-
-require_once 'PHPUnit\Framework\TestCase.php';
-
-require_once __DIR__ . '/../../../src/SGH/PdfBox/Command.php';
-require_once __DIR__ . '/../../../src/SGH/PdfBox/Options.php';
-require_once __DIR__ . '/../../../src/SGH/PdfBox/PdfConverter.php';
-require_once __DIR__ . '/../../../src/SGH/PdfBox/PdfBox.php';
-
 
 /**
  * PdfBox test case. Needs Java and PdfBox
@@ -18,9 +11,8 @@ require_once __DIR__ . '/../../../src/SGH/PdfBox/PdfBox.php';
  * @package PdfBox
  *
  */
-class PdfBoxTest extends \PHPUnit_Framework_TestCase {
-    const __CLASS = __CLASS__;
-
+class PdfBoxTest extends \PHPUnit_Framework_TestCase
+{
     private $jar = 'pdfbox-app-1.6.0.jar';
 
     /**
