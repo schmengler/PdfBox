@@ -4,6 +4,7 @@
     "description": "PHP5 wrapper for the Apache PdfBox ExtractText utility.",
     "keywords": ["pdf", "pdfbox"],
     "homepage": "https://github.com/schmengler/PdfBox",
+    "license": "BSD",
     "authors": [
         {
             "name": "Fabian Schmengler",
