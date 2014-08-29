@@ -4,8 +4,9 @@ A PHP interface for the [PdfBox ExtractText](http://pdfbox.apache.org/commandlin
 
 ## Requirements
 - Java Runtime Environment
-- Pdfbox jar file. Download from here: http://pdfbox.apache.org/downloads.html
-  Tested with 1.6.0 and 1.7.0
+- PdfBox JAR file
+  - Download: http://pdfbox.apache.org/downloads.html
+  - Tested with 1.6.0, 1.7.0 and 1.8.6
 - PHP needs permissions for shell execution
 
 ## Basic Usage
@@ -46,4 +47,4 @@ $converter->getOptions()
 ```
 
 ## PHPUnit tests
-To run the unit tests, change the environment variable `pdfbox-jar` to the full path of your PdfBox jar file. See *phpunit.xml.dist*
+To run the unit tests, change the environment variable `PDFBOX_JAR` to the full path of your PdfBox JAR file. See *phpunit.xml.dist*.

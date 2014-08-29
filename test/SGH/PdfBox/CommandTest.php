@@ -13,7 +13,10 @@ namespace SGH\PdfBox;
  */
 class CommandTest extends \PHPUnit_Framework_TestCase
 {
-    private $jar = 'pdfbox-app-1.6.0.jar';
+    /**
+     * @var string
+     */
+    private $jar;
 
     /**
      * @var Command
@@ -26,11 +29,16 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->jar = getenv('pdfbox-jar') ?: $this->jar;
-        $this->Command = new Command(/* parameters */);
-        $this->Command->setPdfFile('in.pdf');
-        $this->Command->setTextFile('out.txt');
-        $this->Command->setJar($this->jar);
+
+        $this->jar = getenv('PDFBOX_JAR');
+        if ($this->jar !== false) {
+            $this->Command = new Command();
+            $this->Command->setPdfFile('in.pdf');
+            $this->Command->setTextFile('out.txt');
+            $this->Command->setJar($this->jar);
+        } else {
+            $this->markTestSkipped('PDFBOX_JAR is not set.');
+        }
     }
 
     /**
@@ -48,7 +56,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     public function testDefault()
     {
         $cmd = $this->Command->__toString();
-        $this->assertEquals("java -jar \"{$this->jar}\" ExtractText -encoding UTF-8 \"in.pdf\" \"out.txt\"", $cmd);
+        $this->assertEquals("java -jar '{$this->jar}' ExtractText -encoding UTF-8 'in.pdf' 'out.txt'", $cmd);
     }
 
     public function testHtmlToConsole()
@@ -56,7 +64,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
         $this->Command->setAsHtml(true);
         $this->Command->setToConsole(true);
         $cmd = $this->Command->__toString();
-        $this->assertEquals("java -jar \"{$this->jar}\" ExtractText -encoding UTF-8 -html -console \"in.pdf\" \"out.txt\"", $cmd);
+        $this->assertEquals("java -jar '{$this->jar}' ExtractText -encoding UTF-8 -html -console 'in.pdf' 'out.txt'", $cmd);
     }
 
     public function testSomeOptions()
@@ -67,14 +75,13 @@ class CommandTest extends \PHPUnit_Framework_TestCase
             ->setStartPage(2)
             ->setEndPage(10);
         $cmd = $this->Command->__toString();
-        $this->assertEquals("java -jar \"{$this->jar}\" ExtractText -encoding UTF-8 -html -force -startPage 2 -endPage 10 \"in.pdf\" \"out.txt\"", $cmd);
+        $this->assertEquals("java -jar '{$this->jar}' ExtractText -encoding UTF-8 -html -force -startPage 2 -endPage 10 'in.pdf' 'out.txt'", $cmd);
     }
 
     public function testPath()
     {
         $this->Command->setJar('/path/to/pdfbox.jar');
         $cmd = $this->Command->__toString();
-        $this->assertEquals("java -jar \"/path/to/pdfbox.jar\" ExtractText -encoding UTF-8 \"in.pdf\" \"out.txt\"", $cmd);
+        $this->assertEquals("java -jar '/path/to/pdfbox.jar' ExtractText -encoding UTF-8 'in.pdf' 'out.txt'", $cmd);
     }
 }
-
