@@ -11,9 +11,12 @@ namespace SGH\PdfBox;
  * @package PdfBox
  *
  */
-class PdfBoxTest extends \PHPUnit_Framework_TestCase
+class PdfBoxTest extends \PHPUnit_Framework_DOMTestCase
 {
-    private $jar = 'pdfbox-app-1.6.0.jar';
+    /**
+     * @var string
+     */
+    private $jar;
 
     /**
      * @var PdfBox
@@ -48,18 +51,19 @@ TXT;
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div style="page-break-before:always; page-break-after:always"><div><p>Test-Dokument
-Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+<div style="page-break-before:always; page-break-after:always"><div><p><b>Test-Dokument
+</b>Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
 won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
 ship. Clamps, burn down the crew.
 </p>
-<p>The Cryonic Woman
-So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+<p><b>The Cryonic Woman
+</b>So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
 Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
 </p>
 <p>&#8226; She also liked to shut up!
 &#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
-inhibitions?
+</p>
+<p>inhibitions?
 </p>
 <p>Eins Zwei Drei Vier F&#252;nf Sechs
 Polizei Grenadier Alte Hex'</p>
@@ -75,8 +79,13 @@ HTML;
     protected function setUp()
     {
         parent::setUp();
-        $this->jar = getenv('pdfbox-jar') ?: $this->jar;
-        $this->PdfBox = new PdfBox();
+
+        $this->jar = getenv('PDFBOX_JAR');
+        if ($this->jar !== false) {
+            $this->PdfBox = new PdfBox();
+        } else {
+            $this->markTestSkipped('PDFBOX_JAR is not set.');
+        }
     }
 
     /**
@@ -95,9 +104,11 @@ HTML;
      */
     public function testExec()
     {
-        exec('java -jar ' . escapeshellarg($this->jar) . ' 2>&1', $stdErr, $exitCode);
+        exec('java -jar ' . escapeshellarg($this->jar) . ' 2>&1', $stdErrLines, $exitCode);
+        $stdErr = implode(PHP_EOL, $stdErrLines);
+
         $this->assertEquals(1, $exitCode, 'exit code');
-        $this->assertEquals(array('usage: java pdfbox-app-x.y.z.jar <command> <args..>'), $stdErr, 'pdfbox output');
+        $this->assertRegExp('/^Usage: java pdfbox-app-x.y.z.jar <command> <args..>$/mi', $stdErr, 'PdfBox output');
     }
 
     /**
@@ -111,21 +122,25 @@ HTML;
         $this->PdfBox->setPathToPdfBox($this->jar);
         $dom = $this->PdfBox->domFromPdfFile(__DIR__ . '/test.pdf');
         $this->assertInstanceOf('\DOMDocument', $dom);
-        $this->markTestIncomplete('TODO: Test as needed');
+        $this->assertSelectEquals('html > head > title', 'Test-Dokument', 1, $dom);
+        $this->assertSelectRegExp('p b', '/Test-Dokument/', 1, $dom);
+        $this->assertSelectRegExp('p b', '/The Cryonic Woman/', 1, $dom);
+        $this->assertSelectRegExp('p', '/inhibitions/', 1, $dom);
     }
 
     /**
      * Tests PdfBox->domFromPdfStream()
      *
      * @test
-     * @depends testExec
+     * @depends testDomFromPdfFile
      */
     public function testDomFromPdfStream()
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
+        $expectedDom = $this->PdfBox->domFromPdfFile(__DIR__ . '/test.pdf');
         $dom = $this->PdfBox->domFromPdfStream(file_get_contents(__DIR__ . '/test.pdf'));
         $this->assertInstanceOf('\DOMDocument', $dom);
-        $this->markTestIncomplete('TODO: Test as needed');
+        $this->assertEquals($expectedDom->saveHTML(), $dom->saveHTML());
     }
 
     /**
@@ -205,7 +220,7 @@ HTML;
     {
         $expected = preg_replace('/\s+/', ' ', $expected);
         $actual = preg_replace('/\s+/', ' ', $actual);
+
         return self::assertEquals($expected, $actual, $message);
     }
 }
-
