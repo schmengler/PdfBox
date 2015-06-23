@@ -9,6 +9,13 @@ A PHP interface for the [PdfBox ExtractText](http://pdfbox.apache.org/commandlin
   - Tested with 1.6.0, 1.7.0 and 1.8.6
 - PHP needs permissions for shell execution
 
+## Install
+To install with composer:
+
+```sh
+composer require sgh/pdfbox
+```
+
 ## Basic Usage
 ```php
 use SGH\PdfBox
