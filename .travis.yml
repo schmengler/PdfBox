@@ -30,6 +30,8 @@ env:
 before_install:
   - sudo apt-get update
   - sudo apt-get install openjdk-7-jre
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source --dev
 script:
   - wget http://archive.apache.org/dist/pdfbox/${PDFBOX_VERSION}/pdfbox-app-${PDFBOX_VERSION}.jar
   - export PDFBOX_JAR=`pwd`/pdfbox-app-${PDF_BOX_VERSION}.jar
