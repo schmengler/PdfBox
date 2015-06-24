@@ -31,6 +31,6 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install openjdk-7-jre
 script:
-  - wget http://archive.apache.org/dist/pdfbox/${PDF_BOX_VERSION}/pdfbox-app-${PDF_BOX_VERSION}.jar
+  - wget http://archive.apache.org/dist/pdfbox/${PDFBOX_VERSION}/pdfbox-app-${PDFBOX_VERSION}.jar
   - export PDFBOX_JAR=`pwd`/pdfbox-app-${PDF_BOX_VERSION}.jar
   - phpunit test/SGH/PdfBox
