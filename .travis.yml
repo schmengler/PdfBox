@@ -34,5 +34,5 @@ before_install:
   - travis_retry composer install --no-interaction --prefer-source --dev
 script:
   - wget http://archive.apache.org/dist/pdfbox/${PDFBOX_VERSION}/pdfbox-app-${PDFBOX_VERSION}.jar
-  - export PDFBOX_JAR=`pwd`/pdfbox-app-${PDF_BOX_VERSION}.jar
+  - export PDFBOX_JAR=`pwd`/pdfbox-app-${PDFBOX_VERSION}.jar
   - phpunit test/SGH/PdfBox
