@@ -49,7 +49,34 @@ Polizei Grenadier Alte Hex'
 
 TXT;
 
-    private static $expectedHtml = <<<HTML
+    private static $expectedHtml185 = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Test-Dokument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div style="page-break-before:always; page-break-after:always"><div><p><b>Test-Dokument
+</b>Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
+ship. Clamps, burn down the crew.
+</p>
+<p><b>The Cryonic Woman
+</b>So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
+</p>
+<p>&#8226; She also liked to shut up!
+&#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
+inhibitions?
+</p>
+<p>Eins Zwei Drei Vier F&#252;nf Sechs
+Polizei Grenadier Alte Hex'</p>
+
+</div></div>
+</body></html>
+HTML;
+
+    private static $expectedHtmlFrom183 = <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html><head><title>Test-Dokument</title>
@@ -77,7 +104,35 @@ Polizei Grenadier Alte Hex'</p>
 </body></html>
 HTML;
 
-    private static $expectedHtmlUntil182 = <<<HTML
+    private static $expectedHtmlFrom180To182 = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Test-Dokument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div style="page-break-before:always; page-break-after:always"><div><p>Test-Dokument
+Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
+ship. Clamps, burn down the crew.
+</p>
+<p>The Cryonic Woman
+So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
+</p>
+<p>&#8226; She also liked to shut up!
+&#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
+</p>
+<p>inhibitions?
+</p>
+<p>Eins Zwei Drei Vier F&#252;nf Sechs
+Polizei Grenadier Alte Hex'</p>
+
+</div></div>
+</body></html>
+HTML;
+
+    private static $expectedHtmlFrom140To171 = <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html><head><title>Test-Dokument</title>
@@ -101,6 +156,63 @@ inhibitions?
 Polizei Grenadier Alte Hex'</p>
 
 </div></div>
+</body></html>
+HTML;
+
+    private static $expectedHtml131 = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Test-Dokument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div style="page-break-before:always; page-break-after:always"><div><p>Test-Dokument
+Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
+</p>
+<p>ship. Clamps, burn down the crew.
+</p>
+<p>The Cryonic Woman
+</p>
+<p>So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
+</p>
+<p>&#8226; She also liked to shut up!
+</p>
+<p>&#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
+</p>
+<p>inhibitions?
+</p>
+<p>Eins Zwei Drei Vier F&#252;nf Sechs
+</p>
+<p>Polizei Grenadier Alte Hex'</p>
+
+</div></div>
+</body></html>
+HTML;
+
+    private static $expectedHtmlFrom120To121 = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Test-Dokument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div>Test-Dokument
+<br>
+Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+<br>
+won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
+<br>
+ship. Clamps, burn down the crew.<br> The Cryonic Woman<br> So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+<br>
+Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!<br> &#8226; She also liked to shut up!
+<br>
+&#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
+<br>
+inhibitions?
+<br>
+Eins Zwei Drei Vier F&#252;nf Sechs<br> Polizei Grenadier Alte Hex'</div>
 </body></html>
 HTML;
 
@@ -157,7 +269,7 @@ HTML;
         $dom = $this->PdfBox->domFromPdfFile(__DIR__ . '/test.pdf');
         $this->assertInstanceOf('\DOMDocument', $dom);
         $this->assertSelectEquals('html > head > title', 'Test-Dokument', 1, $dom);
-		$headlineSelector = 'p b';
+        $headlineSelector = 'p b';
         if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
             $headlineSelector = 'p';
         }
@@ -191,11 +303,7 @@ HTML;
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $html = $this->PdfBox->htmlFromPdfFile(__DIR__ . '/test.pdf');
-        $expectedHtml = self::$expectedHtml;
-        if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
-            $expectedHtml = self::$expectedHtmlUntil182;
-        }
-        $this->assertEqualsIgnoreWhitespace($expectedHtml, $html);
+        $this->assertEqualsIgnoreWhitespace($this->getExpectedHtml(), $html);
     }
 
     /**
@@ -208,11 +316,28 @@ HTML;
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $html = $this->PdfBox->htmlFromPdfStream(file_get_contents(__DIR__ . '/test.pdf'));
-        $expectedHtml = self::$expectedHtml;
-        if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
-            $expectedHtml = self::$expectedHtmlUntil182;
+        $this->assertEqualsIgnoreWhitespace($this->getExpectedHtml(), $html);
+    }
+    
+    private function getExpectedHtml()
+    {
+        $expectedHtml = self::$expectedHtmlFrom183;
+        if ($this->pdfBoxVersion === '1.8.5') {
+            $expectedHtml = self::$expectedHtml185;
         }
-        $this->assertEqualsIgnoreWhitespace($expectedHtml, $html);
+        if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
+            $expectedHtml = self::$expectedHtmlFrom180To182;
+        }
+        if (version_compare($this->pdfBoxVersion, '1.7.1', '<=')) {
+            $expectedHtml = self::$expectedHtmlFrom140To171;
+        }
+        if (version_compare($this->pdfBoxVersion, '1.3.1', '<=')) {
+            $expectedHtml = self::$expectedHtml131;
+        }
+        if (version_compare($this->pdfBoxVersion, '1.2.1', '<=')) {
+            $expectedHtml = self::$expectedHtmlFrom120To121;
+        }
+        return $expectedHtml;
     }
 
     /**

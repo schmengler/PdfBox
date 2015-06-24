@@ -9,7 +9,6 @@ php:
 matrix:
   allow_failures:
     - php: nightly
-    - env: PDFBOX_VERSION=1.8.5
 env:
   - PDFBOX_VERSION=1.8.9
   - PDFBOX_VERSION=1.8.8
