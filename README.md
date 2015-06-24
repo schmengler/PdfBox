@@ -7,7 +7,8 @@ A PHP interface for the [PdfBox ExtractText](http://pdfbox.apache.org/commandlin
 - Java Runtime Environment
 - PdfBox JAR file
   - Download: http://pdfbox.apache.org/downloads.html
-  - Tested with 1.6.0, 1.7.0 and 1.8.6
+  - Minimum version: 1.2.0
+  - Recommended version: >= 1.8.6
 - PHP needs permissions for shell execution
 
 ## Install

@@ -11,22 +11,23 @@ matrix:
     - php: 5.3
     - php: hhvm
     - php: nightly
-    - env: PDFBOX_VERSION=1.5.0
-    - env: PDFBOX_VERSION=1.4.0
-    - env: PDFBOX_VERSION=1.3.1
-    - env: PDFBOX_VERSION=1.2.1
-    - env: PDFBOX_VERSION=1.2.0
+    - env: PDFBOX_VERSION=1.8.5
+    - env: PDFBOX_VERSION=1.8.4
+    - env: PDFBOX_VERSION=1.8.3
+    - env: PDFBOX_VERSION=1.8.2
+    - env: PDFBOX_VERSION=1.8.1
+    - env: PDFBOX_VERSION=1.8.0
 env:
   - PDFBOX_VERSION=1.8.9
+  - PDFBOX_VERSION=1.8.8
+  - PDFBOX_VERSION=1.8.7
+  - PDFBOX_VERSION=1.8.6
+  - PDFBOX_VERSION=1.8.5
+  - PDFBOX_VERSION=1.8.4
+  - PDFBOX_VERSION=1.8.3
+  - PDFBOX_VERSION=1.8.2
+  - PDFBOX_VERSION=1.8.1
   - PDFBOX_VERSION=1.8.0
-  - PDFBOX_VERSION=1.7.1
-  - PDFBOX_VERSION=1.7.0
-  - PDFBOX_VERSION=1.6.0
-  - PDFBOX_VERSION=1.5.0
-  - PDFBOX_VERSION=1.4.0
-  - PDFBOX_VERSION=1.3.1
-  - PDFBOX_VERSION=1.2.1
-  - PDFBOX_VERSION=1.2.0
 before_install:
   - sudo apt-get update
   - sudo apt-get install openjdk-7-jre
