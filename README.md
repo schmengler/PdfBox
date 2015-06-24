@@ -2,8 +2,7 @@
 
 A PHP interface for the [PdfBox ExtractText](http://pdfbox.apache.org/commandline/#extractText) utility, useful to unit-test contents of generated PDFs.
 
-[![Latest Stable Version](https://poser.pugx.org/sgh/pdfbox/version)](https://packagist.org/packages/sgh/pdfbox) [![Latest Unstable Version](https://poser.pugx.org/sgh/pdfbox/v/unstable)](//packagist.org/packages/sgh/pdfbox) [![Total Downloads](https://poser.pugx.org/sgh/pdfbox/downloads)](https://packagist.org/packages/sgh/pdfbox)
-
+[![Build Status](https://travis-ci.org/schmengler/PdfBox.svg?branch=master)](https://travis-ci.org/schmengler/PdfBox) [![Latest Stable Version](https://poser.pugx.org/sgh/pdfbox/version)](https://packagist.org/packages/sgh/pdfbox) [![Latest Unstable Version](https://poser.pugx.org/sgh/pdfbox/v/unstable)](//packagist.org/packages/sgh/pdfbox) [![Total Downloads](https://poser.pugx.org/sgh/pdfbox/downloads)](https://packagist.org/packages/sgh/pdfbox) [![License](https://poser.pugx.org/sgh/pdfbox/license)](https://packagist.org/packages/sgh/pdfbox)
 ## Requirements
 - Java Runtime Environment
 - PdfBox JAR file
