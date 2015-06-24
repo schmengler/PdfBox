@@ -118,7 +118,7 @@ HTML;
         } else {
             $this->markTestSkipped('PDFBOX_JAR is not set.');
         }
-        preg_match('/-([\d-]+).jar$/', $this->jar, $matches);
+        preg_match('/-([\d\.]+).jar$/', $this->jar, $matches);
         $this->pdfBoxVersion = $matches[1];
     }
 
