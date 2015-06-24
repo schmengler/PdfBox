@@ -198,13 +198,14 @@ HTML;
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<div>Test-Dokument
-<br>
+<div>Test-Dokument<br>
 Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
 <br>
 won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
 <br>
-ship. Clamps, burn down the crew.<br> The Cryonic Woman<br> So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+ship. Clamps, burn down the crew.<br>
+The Cryonic Woman<br>
+So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
 <br>
 Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!<br> &#8226; She also liked to shut up!
 <br>
@@ -270,12 +271,17 @@ HTML;
         $this->assertInstanceOf('\DOMDocument', $dom);
         $this->assertSelectEquals('html > head > title', 'Test-Dokument', 1, $dom);
         $headlineSelector = 'p b';
+        $paragraphSelector = 'p';
         if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
             $headlineSelector = 'p';
         }
+        if (version_compare($this->pdfBoxVersion, '1.2.1', '<=')) {
+            $headlineSelector = 'div';
+            $paragraphSelector = 'div';
+        }
         $this->assertSelectRegExp($headlineSelector, '/Test-Dokument/', 1, $dom);
         $this->assertSelectRegExp($headlineSelector, '/The Cryonic Woman/', 1, $dom);
-        $this->assertSelectRegExp('p', '/inhibitions/', 1, $dom);
+        $this->assertSelectRegExp($paragraphSelector, '/inhibitions/', 1, $dom);
     }
 
     /**
