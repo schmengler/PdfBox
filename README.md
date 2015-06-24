@@ -4,11 +4,12 @@ A PHP interface for the [PdfBox ExtractText](http://pdfbox.apache.org/commandlin
 
 [![Build Status](https://travis-ci.org/schmengler/PdfBox.svg?branch=master)](https://travis-ci.org/schmengler/PdfBox) [![Latest Stable Version](https://poser.pugx.org/sgh/pdfbox/version)](https://packagist.org/packages/sgh/pdfbox) [![Latest Unstable Version](https://poser.pugx.org/sgh/pdfbox/v/unstable)](//packagist.org/packages/sgh/pdfbox) [![Total Downloads](https://poser.pugx.org/sgh/pdfbox/downloads)](https://packagist.org/packages/sgh/pdfbox) [![License](https://poser.pugx.org/sgh/pdfbox/license)](https://packagist.org/packages/sgh/pdfbox)
 ## Requirements
+- PHP >=5.3 or HHVM
 - Java Runtime Environment
 - PdfBox JAR file
   - Download: http://pdfbox.apache.org/downloads.html
   - Minimum version: 1.2.0
-  - Recommended version: >= 1.8.6
+  - Recommended version: >= 1.8.3
 - PHP needs permissions for shell execution
 
 ## Install

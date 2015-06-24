@@ -22,6 +22,11 @@ class PdfBoxTest extends \PHPUnit_Framework_DOMTestCase
      * @var PdfBox
      */
     private $PdfBox;
+    
+    /**
+     * @var string
+     */
+    private $pdfBoxVersion;
 
     /**
      * Content of test.pdf as text
@@ -72,6 +77,33 @@ Polizei Grenadier Alte Hex'</p>
 </body></html>
 HTML;
 
+    private static $expectedHtmlUntil182 = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>Test-Dokument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div style="page-break-before:always; page-break-after:always"><div><p>Test-Dokument
+Also Zoidberg. Yes, if you make it look like an electrical fire. When you do things right, people
+won't be sure you've done anything at all. Alright, let's mafia things up a bit. Joey, burn down the
+ship. Clamps, burn down the crew.
+</p>
+<p>The Cryonic Woman
+So, how 'bout them Knicks? She also liked to shut up! I was all of history's great robot actors -
+Acting Unit 0.8; Thespomat; David Duchovny! You, minion. Lift my arm. AFTER HIM!
+</p>
+<p>&#8226; She also liked to shut up!
+&#8226; Now that the, uh, garbage ball is in space, Doctor, perhaps you can help me with my sexual
+inhibitions?
+</p>
+<p>Eins Zwei Drei Vier F&#252;nf Sechs
+Polizei Grenadier Alte Hex'</p>
+
+</div></div>
+</body></html>
+HTML;
+
     /**
      * Prepares the environment before running a test. The pdfbox-jar environemnt variable
      * can be set in phpunit.xml to specify the path to the PdfBox jar file
@@ -86,6 +118,8 @@ HTML;
         } else {
             $this->markTestSkipped('PDFBOX_JAR is not set.');
         }
+        preg_match('/-([\d-]+).jar$/', $this->jar, $matches);
+        $this->pdfBoxVersion = $matches[1];
     }
 
     /**
@@ -123,8 +157,12 @@ HTML;
         $dom = $this->PdfBox->domFromPdfFile(__DIR__ . '/test.pdf');
         $this->assertInstanceOf('\DOMDocument', $dom);
         $this->assertSelectEquals('html > head > title', 'Test-Dokument', 1, $dom);
-        $this->assertSelectRegExp('p b', '/Test-Dokument/', 1, $dom);
-        $this->assertSelectRegExp('p b', '/The Cryonic Woman/', 1, $dom);
+		$headlineSelector = 'p b';
+        if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
+            $headlineSelector = 'p';
+        }
+        $this->assertSelectRegExp($headlineSelector, '/Test-Dokument/', 1, $dom);
+        $this->assertSelectRegExp($headlineSelector, '/The Cryonic Woman/', 1, $dom);
         $this->assertSelectRegExp('p', '/inhibitions/', 1, $dom);
     }
 
@@ -153,7 +191,11 @@ HTML;
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $html = $this->PdfBox->htmlFromPdfFile(__DIR__ . '/test.pdf');
-        $this->assertEqualsIgnoreWhitespace(self::$expectedHtml, $html);
+        $expectedHtml = self::$expectedHtml;
+        if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
+            $expectedHtml = self::$expectedHtmlUntil182;
+        }
+        $this->assertEqualsIgnoreWhitespace($expectedHtml, $html);
     }
 
     /**
@@ -166,7 +208,11 @@ HTML;
     {
         $this->PdfBox->setPathToPdfBox($this->jar);
         $html = $this->PdfBox->htmlFromPdfStream(file_get_contents(__DIR__ . '/test.pdf'));
-        $this->assertEqualsIgnoreWhitespace(self::$expectedHtml, $html);
+        $expectedHtml = self::$expectedHtml;
+        if (version_compare($this->pdfBoxVersion, '1.8.2', '<=')) {
+            $expectedHtml = self::$expectedHtmlUntil182;
+        }
+        $this->assertEqualsIgnoreWhitespace($expectedHtml, $html);
     }
 
     /**
