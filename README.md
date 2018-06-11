@@ -21,7 +21,7 @@ composer require sgh/pdfbox
 
 ## Basic Usage
 ```php
-use SGH\PdfBox
+use SGH\PdfBox\PdfBox;
 
 //$pdf = GENERATED_PDF;
 $converter = new PdfBox;
